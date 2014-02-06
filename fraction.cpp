@@ -8,13 +8,15 @@
 
 using namespace std;
 //constructor
-Fraction::Fraction(long numerateur, long denominateur, long entier) : n(numerateur), d(denominateur), e(entier){
-	if(d == 0){
-		d = 1;
+Fraction::Fraction(long _num, long _den, long _ent) 
+	: num(_num), den(_den), ent(_ent){
+	if(den == 0){
+		den = 1;
 	}
 	simplifier();
 }
-Fraction::Fraction(const Fraction& fraction) : n(fraction.n), d(fraction.d), e(fraction.e){}
+Fraction::Fraction(const Fraction& fraction) 
+	: num(fraction.num), den(fraction.den), ent(fraction.ent){}
 
 
 Fraction& Fraction::operator+=(const Fraction& autre){
@@ -23,19 +25,19 @@ Fraction& Fraction::operator+=(const Fraction& autre){
 }
 
 Fraction Fraction::operator+(const Fraction& autre) const{
-	Fraction result = Fraction(n * autre.d + autre.n * d, d * autre.d, e + autre.e);
+	Fraction result = Fraction(num * autre.den + autre.num * den, den * autre.den, ent + autre.ent);
     return result;
 }
     
 bool Fraction::operator < (const Fraction& autre) const{
-	if(e == autre.e){
-		if(n*autre.d < autre.n*d){
+	if(ent == autre.ent){
+		if(num * autre.den < autre.num * den){
 			return true;
 		}else{
 			return false;
 		}
 	}else{
-		if(e < autre.e){
+		if(ent < autre.ent){
 			return true;
 		}else{
 			return false;
@@ -44,14 +46,14 @@ bool Fraction::operator < (const Fraction& autre) const{
 }
 
 bool Fraction::operator > (const Fraction& autre) const{
-    if(e == autre.e){
-		if(n*autre.d > autre.n*d){
+    if(ent == autre.ent){
+		if(num * autre.den > autre.num * den){
 			return true;
 		}else{
 			return false;
 		}
 	}else{
-		if(e > autre.e){
+		if(ent > autre.ent){
 			return true;
 		}else{
 			return false;
@@ -60,14 +62,14 @@ bool Fraction::operator > (const Fraction& autre) const{
 }
 
 void Fraction::simplifier(){
-	int div = pgcd(d, n);
-	n = n/div;
-	d = d/div;
-	if(n >= d){
-		int retenu 		= n % d;
-		int quotient  	= n / d;
-		e += quotient;
-		n = retenu;
+	int div = pgcd(den, num);
+	num = num/div;
+	den = den/div;
+	if(num >= den){
+		int retenu 		= num % den;
+		int quotient  	= num / den;
+		ent += quotient;
+		num = retenu;
 	}
 }
 int Fraction::pgcd(int x, int y){
@@ -90,23 +92,23 @@ std::istream& operator >> (std::istream& is, Fraction& f){
             is >> b;
             assert(is.get()=='/');
             is >> c;
-            f.e = a;
-            f.n = b;
-            f.d = c;
+            f.ent = a;
+            f.num = b;
+            f.den = c;
             break;
         case '/':
             // forme a/b   (fraction seulement)
             is.get();
             is >> b;
-            f.e = 0;
-            f.n = a;
-            f.d = b;
+            f.ent = 0;
+            f.num = a;
+            f.den = b;
             break;
         default:
             // forme a     (entier seulement)
-            f.e = a;
-            f.n = 0;
-            f.d = 1;
+            f.ent = a;
+            f.num = 0;
+            f.den = 1;
             break;
     }
     f.simplifier();
@@ -114,16 +116,16 @@ std::istream& operator >> (std::istream& is, Fraction& f){
 }
 
 std::ostream& operator << (std::ostream& os, const Fraction& f){
-    if(f.e != 0){
-		os << f.e;
-		if(f.n != 0){
+    if(f.ent != 0){
+		os << f.ent;
+		if(f.num != 0){
 			os << '+';	
 		}
 	}
-	if(f.n != 0){
-		os << f.n << '/' << f.d;
+	if(f.num != 0){
+		os << f.num << '/' << f.den;
 	}
-	if(f.n == 0 && f.e == 0){
+	if(f.num == 0 && f.ent == 0){
 		os << '0';
 	}
 	os << endl;
