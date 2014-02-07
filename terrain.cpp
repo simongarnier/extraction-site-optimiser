@@ -14,8 +14,8 @@ std::istream& operator >>(std::istream& is, Terrain& t){
     t.largeur = largeur;
     t.hauteur = hauteur;
     Fraction f;
-    for(int x=0;x<largeur;x++)
-        for(int y=0;y<hauteur;y++){
+    for(int x=0;x<hauteur;x++)
+        for(int y=0;y<largeur;y++){
             is >> f;
             t.matrice[x][y] = f;            
         }

@@ -29,6 +29,9 @@ int main(int argc, const char** argv)
     if(argc==3){
         Fraction meilleureValeur;
         // Mettre votre algorithme ici.
+        
+        
+        
         cout << "0\t0" << endl;
         cout << meilleureValeur << endl;
     }
