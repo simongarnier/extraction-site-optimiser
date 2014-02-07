@@ -12,23 +12,18 @@
 
 class Terrain{
   public:
-	Tableau<Tableau<Fraction> > matrice;
-	int largeur;
-	int hauteur;
-  
-    // À compléter : déclarer vos constructeurs et/ou destructeurs.
-    
-    // À compléter : déclarer les autres fonctions et opérateurs que vous jugez utiles.
-
-        
-    
-    
+	//Donne le potentiel à la coordonnée donnée
+    Fraction getPotentiel(int x, int y);
+    int      getLargeur();
+    int      getHauteur();
 
   
   private:
-    // À compléter : représentation. Indice : au moins un numérateur et un dédominateur.
+    Tableau<Tableau<Fraction> > matrice;
+    int largeur;
+	int hauteur;
     
-    // À compléter : déclarer les fonctions privées que vous jugez utiles.
+    
   
     // Ceci n'est pas des déclarations, mais des liens d'amitiés avec des opérateurs hors de la classe.
     

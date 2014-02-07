@@ -28,11 +28,29 @@ int main(int argc, const char** argv)
     int dimensionSite1 = atoi(argv[2]);
     if(argc==3){
         Fraction meilleureValeur;
-        // Mettre votre algorithme ici.
+        Fraction potentiel;
+        int solX = 0;
+        int solY = 0;
+        for (int y = 0; y <= terrain.getHauteur() - dimensionSite1; ++y) {
+            for (int x = 0; x <= terrain.getLargeur() - dimensionSite1; ++x) {
+                //Évaluation du potentiel du carré (x,y)-(x+dimsite1-1,y+dimsite1-1)
+                potentiel = 0;
+                for (int i = x; i < x + dimensionSite1; ++i) {
+                    for (int j = y; j < y + dimensionSite1; ++j) {
+                        potentiel += terrain.getPotentiel(i,j);
+                    }
+                }
+                if(potentiel > meilleureValeur){
+                    meilleureValeur = potentiel;
+                    solX = x;
+                    solY = y;
+                }
+                    
+                
+            }
+        }
         
-        
-        
-        cout << "0\t0" << endl;
+        cout << solX << " " << solY << endl;
         cout << meilleureValeur << endl;
     }
 

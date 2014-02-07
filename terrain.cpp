@@ -6,6 +6,23 @@
 #include "terrain.h"
 
 
+Fraction Terrain::getPotentiel(int x, int y)
+{
+    return matrice[x][y];
+}
+
+int Terrain::getLargeur()
+{
+    return largeur;
+}
+
+int Terrain::getHauteur()
+{
+    return hauteur;
+}
+
+
+
 
 std::istream& operator >>(std::istream& is, Terrain& t){
     // À compléter.
@@ -14,8 +31,8 @@ std::istream& operator >>(std::istream& is, Terrain& t){
     t.largeur = largeur;
     t.hauteur = hauteur;
     Fraction f;
-    for(int x=0;x<hauteur;x++)
-        for(int y=0;y<largeur;y++){
+    for(int y=0;y<hauteur;++y)
+        for(int x=0;x<hauteur;++x){
             is >> f;
             t.matrice[x][y] = f;            
         }
