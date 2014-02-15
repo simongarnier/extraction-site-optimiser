@@ -6,29 +6,38 @@
 #if !defined(__TERRAIN_H__)
 #define __TERRAIN_H__
 
+#include <cstdlib>
 #include <iostream>
 #include "fraction.h"
 #include "tableau.h"
 
-class Terrain{
-  public:
-	//Donne le potentiel à la coordonnée donnée
-    Fraction getPotentiel(int x, int y);
-    int      getLargeur();
-    int      getHauteur();
 
-  
-  private:
-    Tableau<Tableau<Fraction> > matrice;
-    int largeur;
-	int hauteur;
+class Terrain{
+   
+   public:
+      //Donne l'emplacement à la coordonnée donnée
+      Fraction getPotentiel      (int x, int y);
+      Fraction getPotentielSite  (int x, int y, int dimension);
+      void     printCouverture   ();
+      void     resetCouverture   (int x, int y, int dimension);
+      int      getLargeur();
+      int      getHauteur();
+
+      Tableau<Tableau<int> > couverture;
+   
+   private:
+      Tableau<Tableau<Fraction> > potentiel;
+      int largeur;
+      int hauteur;
+
+   
+
+   // Ceci n'est pas des déclarations, mais des liens d'amitiés avec des opérateurs hors de la classe.
     
-    
-  
-    // Ceci n'est pas des déclarations, mais des liens d'amitiés avec des opérateurs hors de la classe.
-    
-    friend std::istream& operator >>(std::istream&, Terrain& t);
+   friend std::istream& operator >>(std::istream&, Terrain& t);
 };
+
+
 
 #endif
 

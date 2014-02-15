@@ -24,9 +24,9 @@ int main(int argc, const char** argv)
     fichiercarte >> terrain;
     fichiercarte.close(); 
 	
-    
-    int dimensionSite1 = atoi(argv[2]);
+    int dimensionSite1;
     if(argc==3){
+        dimensionSite1 = atoi(argv[2]);
         Fraction meilleureValeur;
         Fraction potentiel;
         int solX = 0;
@@ -34,19 +34,14 @@ int main(int argc, const char** argv)
         for (int y = 0; y <= terrain.getHauteur() - dimensionSite1; ++y) {
             for (int x = 0; x <= terrain.getLargeur() - dimensionSite1; ++x) {
                 //Évaluation du potentiel du carré (x,y)-(x+dimsite1-1,y+dimsite1-1)
-                potentiel = 0;
-                for (int i = x; i < x + dimensionSite1; ++i) {
-                    for (int j = y; j < y + dimensionSite1; ++j) {
-                        potentiel += terrain.getPotentiel(i,j);
-                    }
-                }
+                potentiel = terrain.getPotentielSite(x,y,dimensionSite1);
+                terrain.printCouverture();
+                terrain.resetCouverture(x,y,dimensionSite1);
                 if(potentiel > meilleureValeur){
                     meilleureValeur = potentiel;
                     solX = x;
                     solY = y;
                 }
-                    
-                
             }
         }
         
@@ -54,15 +49,46 @@ int main(int argc, const char** argv)
         cout << meilleureValeur << endl;
     }
 
-    // Critère E
+    int dimensionSite2;
     if(argc==4){
-        int dimensionSite2 = atoi(argv[3]);
+        dimensionSite1 = atoi(argv[2]);
+        dimensionSite2 = atoi(argv[3]);
         Fraction meilleureValeur;
-        cerr << "Ce programme ne supporte pas 2 sites d'extraction!" << endl;
-        cout << "0\t0" << endl;
-        cout << "0\t0" << endl;
+        Fraction potentiel1;
+        Fraction potentiel2;
+        int sol1x = 0;
+        int sol1y = 0;
+        int sol2x = 0;
+        int sol2y = 0;
+        for (int y1 = 0; y1 <= terrain.getHauteur() - dimensionSite1; ++y1){
+            for (int x1 = 0; x1 <= terrain.getLargeur() - dimensionSite1; ++x1){
+                potentiel1 = terrain.getPotentielSite(x1,y1,dimensionSite1);
+                cout << "1 : "<< endl;
+                terrain.printCouverture();
+                for (int y2 = 0; y2 <= terrain.getHauteur() - dimensionSite2; ++y2){
+                    for (int x2 = 0; x2 <= terrain.getLargeur() - dimensionSite2; ++x2){
+                        potentiel2 = potentiel1 + terrain.getPotentielSite(x2,y2,dimensionSite2);
+                        cout << "2 : "<< endl;
+                        terrain.printCouverture();
+                        terrain.resetCouverture(x2,y2,dimensionSite2);
+                        
+                        if(potentiel2 > meilleureValeur){
+                            meilleureValeur = potentiel2;
+                            sol1x = x1;
+                            sol1y = y1;
+                            sol2x = x2;
+                            sol2y = y2;
+                        }
+                    }
+                }
+                
+                terrain.resetCouverture(x1,y1,dimensionSite1);
+            }
+
+        }
+        cout << sol1x << " " << sol1y << endl;
+        cout << sol2x << " " << sol2y << endl;
         cout << meilleureValeur << endl;
-        return 1;
     }
     
     // Boni H
