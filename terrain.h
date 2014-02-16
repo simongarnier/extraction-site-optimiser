@@ -10,7 +10,10 @@
 #include "fraction.h"
 #include "tableau.h"
 
+class Emplacement;
+
 class Terrain{
+    
    public:
       Fraction getPotentielSite  (const int y, const int x, const int dimension);
       void     resetCouverture   (const int y, const int x, const int dimension);
@@ -21,12 +24,20 @@ class Terrain{
 
   
    private:
-      Tableau<Tableau<Fraction> >   potentiel;
-      Tableau<Tableau<int> >        couverture;
+      Tableau<Tableau<Emplacement> >  matrice;
       int largeur;
       int hauteur;
 
       friend std::istream& operator >>(std::istream&, Terrain& t);
+};
+
+class Emplacement{
+private:
+    Fraction potentiel;
+    int      couverture;
+    
+    friend class Terrain;
+    friend std::istream& operator >>(std::istream&, Terrain& t);
 };
 
 #endif
