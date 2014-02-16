@@ -10,7 +10,19 @@
 #include "fraction.h"
 #include "tableau.h"
 
+<<<<<<< HEAD
 class Emplacement;
+=======
+class Emplacement{
+   public:
+      Fraction potentiel;
+      int      couverture;
+
+   friend class Terrain;
+
+};
+
+>>>>>>> 9d903b2eaa64d8a7a0cce1274cfb69bf3ff2294b
 
 class Terrain{
     
@@ -24,7 +36,11 @@ class Terrain{
 
   
    private:
+<<<<<<< HEAD
       Tableau<Tableau<Emplacement> >  matrice;
+=======
+      Tableau<Tableau<Emplacement> >   matrice;
+>>>>>>> 9d903b2eaa64d8a7a0cce1274cfb69bf3ff2294b
       int largeur;
       int hauteur;
 
