@@ -15,6 +15,7 @@ class Terrain{
       Fraction getPotentielSite  (const int y, const int x, const int dimension);
       void     resetCouverture   (const int y, const int x, const int dimension);
       void     printCouverture   ();
+      void     printPotentiel    ();
       int      getLargeur        ();
       int      getHauteur        ();
 

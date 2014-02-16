@@ -23,7 +23,7 @@ int main(int argc, const char** argv)
     Terrain terrain;
     fichiercarte >> terrain;
     fichiercarte.close(); 
-	   
+    
     int dimensionSite1 = atoi(argv[2]);
     if(argc==3){
         Fraction meilleureValeur;
@@ -65,7 +65,7 @@ int main(int argc, const char** argv)
                 //terrain.printCouverture();
                 for (int y2 = 0; y2 <= terrain.getHauteur() - dimensionSite2; ++y2){
                     for (int x2 = 0; x2 <= terrain.getLargeur() - dimensionSite2; ++x2){
-                        potentiel2 = potentiel1 + terrain.getPotentielSite(x2, y2, dimensionSite1);
+                        potentiel2 = potentiel1 + terrain.getPotentielSite(x2, y2, dimensionSite2);
                         //terrain.printCouverture();
                         terrain.resetCouverture(x2,y2,dimensionSite2);
 

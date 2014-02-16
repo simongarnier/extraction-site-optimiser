@@ -8,8 +8,8 @@
 Fraction Terrain::getPotentielSite(const int x, const int y, const int dimension)
 {
     Fraction p =0;
-    for (int i = x; i < x + dimension; ++i){
-        for (int j = y; j < y + dimension; ++j){
+    for (int i = y; i < y + dimension; ++i){
+        for (int j = x; j < x + dimension; ++j){
             if(couverture[i][j] < 1){
                 p += potentiel[i][j];    
             }
@@ -21,8 +21,8 @@ Fraction Terrain::getPotentielSite(const int x, const int y, const int dimension
 
 void Terrain::resetCouverture(const int x, const int y, const int dimension)
 {
-    for (int i = x; i < x + dimension; ++i){
-        for (int j = y; j < y + dimension; ++j){
+    for (int i = y; i < y + dimension; ++i){
+        for (int j = x; j < x + dimension; ++j){
             couverture[i][j]--;
             //assert(couverture[j][i] >= 0);
         }
@@ -30,9 +30,19 @@ void Terrain::resetCouverture(const int x, const int y, const int dimension)
 }
 
 void Terrain::printCouverture(){
-    for (int x = 0; x < largeur; ++x){
-        for (int y = 0; y < 0 + hauteur; ++y){
-            std::cout << couverture[x][y] << " ";
+    for (int i = 0; i < hauteur; ++i){
+        for (int j = 0; j < 0 + largeur; ++j){
+            std::cout << couverture[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+     std::cout << std::endl;
+}
+
+void Terrain::printPotentiel(){
+    for (int i = 0; i < hauteur; ++i){
+        for (int j = 0; j < 0 + largeur; ++j){
+            std::cout << potentiel[i][j] << " ";
         }
         std::cout << std::endl;
     }
