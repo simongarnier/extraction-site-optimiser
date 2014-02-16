@@ -2,22 +2,16 @@
  *    INF3105 - Structures de données et algorithmes             *
  *    Hiver 2014 / TP1                                           *
  *    http://ericbeaudry.ca/INF3105/tp1/                         */
- 
+#include <assert.h> 
 #include "terrain.h"
 
-
-Fraction Terrain::getPotentiel(int x, int y)
+Fraction Terrain::getPotentielSite(const int x, const int y, const int dimension)
 {
-    return potentiel[x][y];
-}
-
-Fraction Terrain::getPotentielSite(int x, int y, int dimension)
-{
-    Fraction p = 0;
+    Fraction p =0;
     for (int i = x; i < x + dimension; ++i){
         for (int j = y; j < y + dimension; ++j){
-            if (couverture[i][j] < 1){
-                p += potentiel[i][j];
+            if(couverture[i][j] < 1){
+                p += potentiel[i][j];    
             }
             couverture[i][j]++;
         }
@@ -25,23 +19,14 @@ Fraction Terrain::getPotentielSite(int x, int y, int dimension)
     return p;
 }
 
-void Terrain::resetCouverture(int x, int y, int dimension)
+void Terrain::resetCouverture(const int x, const int y, const int dimension)
 {
     for (int i = x; i < x + dimension; ++i){
         for (int j = y; j < y + dimension; ++j){
             couverture[i][j]--;
+            //assert(couverture[j][i] >= 0);
         }
     }
-}
-
-int Terrain::getLargeur()
-{
-    return largeur;
-}
-
-int Terrain::getHauteur()
-{
-    return hauteur;
 }
 
 void Terrain::printCouverture(){
@@ -54,20 +39,25 @@ void Terrain::printCouverture(){
      std::cout << std::endl;
 }
 
+int Terrain::getLargeur(){ return largeur; }
 
-std::istream& operator >>(std::istream& is, Terrain& t){
-    // À compléter.
-    int largeur, hauteur;
-    is >> largeur >> hauteur;
-    t.largeur = largeur;
-    t.hauteur = hauteur;
+int Terrain::getHauteur(){ return hauteur; } 
+
+std::istream& operator >>(std::istream& is, Terrain& t)
+{
+    is >> t.largeur >> t.hauteur;
     Fraction f;
-    for(int y=0;y<hauteur;++y)
-        for(int x=0;x<hauteur;++x){
+    for(int y=0;y<t.hauteur;++y){
+        Tableau<Fraction>   fs;
+        Tableau<int>        ints;
+        t.potentiel.ajouter(fs);
+        t.couverture.ajouter(ints);
+        for(int x=0;x<t.largeur;++x){
             is >> f;
-            t.potentiel[x][y] = f; 
-            t.couverture[x][y] = 0;             
+            t.potentiel[y].ajouter(f);
+            t.couverture[y].ajouter(0);           
         }
+    }
     return is;
 }
 

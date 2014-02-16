@@ -148,15 +148,16 @@ void Tableau<T>::vider()
 template <class T>
 T& Tableau<T>::operator[] (int index)
 {
-    if(index>=capacite)
-		redimensionner(std::max(index, 2*capacite));
+    if(index>=capacite){
+      redimensionner(std::max(index, 2*capacite));
+    } 
+
 		return elements[index];
 }
 
 template <class T>
 const T& Tableau<T>::operator[] (int index) const
 {
-    
 	assert(index<nbElements);
 	return elements[index];
 }
@@ -191,6 +192,7 @@ bool Tableau<T>::operator == (const Tableau<T>& autre) const
 
 template <class T>
 void Tableau<T>::redimensionner(int nouvCapacite){
+
    capacite = nouvCapacite;
    T* temp = new T[capacite];
    for(int i=0;i<nbElements;++i)

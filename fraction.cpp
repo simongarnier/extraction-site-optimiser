@@ -128,7 +128,6 @@ std::ostream& operator << (std::ostream& os, const Fraction& f){
 	if(f.num == 0 && f.ent == 0){
 		os << '0';
 	}
-	os << endl;
     return os;
 }
 

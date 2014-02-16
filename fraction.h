@@ -12,6 +12,7 @@ class Fraction{
       Fraction(long num = 0, long den = 0, long ent = 0);     //constructeur standart	
       Fraction(const Fraction&);                                                 //constructeur par copie
 
+      // À compléter : déclarer les autres fonctions et opérateurs que vous jugez utiles.
 
       Fraction& operator+=(const Fraction& autre);
       Fraction operator+(const Fraction& autre) const;
@@ -23,6 +24,8 @@ class Fraction{
       long num;
       long den;
       long ent;
+
+      // À compléter : déclarer les fonctions privées que vous jugez utiles.
       
       void simplifier();
       int pgcd(int x,int y);
